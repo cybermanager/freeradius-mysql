@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  freeradius-mysql:
+    container_name: ${FREERADIUS_NAME}
+    ports:
+      - ${FREERADIUS_AUTH_PORT}:1812/udp
+      - ${FREERADIUS_ACCT_PORT}:1813/udp
+    env_file:
+      - .env
+    volumes:
+      - "./config/radiusd.conf:/etc/freeradius/radiusd.conf:ro"
+      - "./config/default:/etc/freeradius/sites-available/default:ro"
+      - "./config/sql:/etc/freeradius/mods-enabled/sql:ro"
+      - "./config/queries.conf:/etc/freeradius/mods-config/sql/main/mysq/queries.conf:ro"
+    image: freeradius/freeradius-server:3.0.23
+#    command: freeradius -X
