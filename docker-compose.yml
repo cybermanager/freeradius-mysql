@@ -1,4 +1,12 @@
 version: "3.3"
+networks:
+  freeradius:
+    name: freeradius
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${NETWORK_IP_CIDR}
 services:
   freeradius-mysql:
     container_name: ${FREERADIUS_NAME}
@@ -12,5 +20,7 @@ services:
       - "./config/default:/etc/freeradius/sites-available/default:ro"
       - "./config/sql:/etc/freeradius/mods-enabled/sql:ro"
       - "./config/queries.conf:/etc/freeradius/mods-config/sql/main/mysq/queries.conf:ro"
+    networks:
+      - freeradius
     image: freeradius/freeradius-server:3.0.23
 #    command: freeradius -X
