@@ -15,6 +15,7 @@ services:
       - ${FREERADIUS_ACCT_PORT}:1813/udp
     env_file:
       - .env
+    restart: always
     volumes:
       - "./config/radiusd.conf:/etc/freeradius/radiusd.conf:ro"
       - "./config/default:/etc/freeradius/sites-available/default:ro"
