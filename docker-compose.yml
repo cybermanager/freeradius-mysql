@@ -23,5 +23,5 @@ services:
       - "./config/queries.conf:/etc/freeradius/mods-config/sql/main/mysq/queries.conf:ro"
     networks:
       - freeradius
-    image: freeradius/freeradius-server:3.0.23
+    image: freeradius/freeradius-server:3.0.24
 #    command: freeradius -X
