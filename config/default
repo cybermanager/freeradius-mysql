@@ -451,6 +451,13 @@ authorize {
 #	Autz-Type Status-Server {
 #
 #	}
+
+# The above will run when the user reconnects and update the database to clear the stale session
+    if(User-Name){
+        if("%{sql:UPDATE radacct set acctstoptime=ADDDATE(acctstarttime,INTERVAL acctsessiontime SECOND), acctterminatecause='Clear-Stale Session' WHERE username='%{User-Name}' and callingstationid='%{Calling-Station-Id}' and acctstoptime is NULL}"){
+        }
+    }
+
 }
 
 
