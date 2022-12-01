@@ -568,6 +568,11 @@ authenticate {
 #
 preacct {
 	preprocess
+	if (&Mikrotik-Realm) {
+        update request {
+            Realm := &Mikrotik-Realm
+        }
+    }
 
 	#
 	#  Merge Acct-[Input|Output]-Gigawords and Acct-[Input-Output]-Octets
